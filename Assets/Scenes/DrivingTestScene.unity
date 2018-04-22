@@ -152,6 +152,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1107221045899960, guid: b7417ff33bb39d643a136a0c9aec32b2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114381785309575986, guid: b7417ff33bb39d643a136a0c9aec32b2,
+        type: 2}
+      propertyPath: angle
+      value: 180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7417ff33bb39d643a136a0c9aec32b2, type: 2}
   m_IsPrefabAsset: 0
@@ -182,16 +191,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1d789265b393545a7f1834126564e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleObstacles: []
+  possibleObstacles:
+  - {fileID: 1009726204938686, guid: 058b1dd2c96067647bc76c1de3134706, type: 2}
+  - {fileID: 1936883215099676, guid: 013bbfd545b5a3e49beb889c3f31c437, type: 2}
+  - {fileID: 1470225741307016, guid: 0cbe5da8dc94dee45bf2c1fc8e17d6b4, type: 2}
+  - {fileID: 1048131856806012, guid: 5db2561edddde8d47b6c8a95d1316503, type: 2}
   possibleTiles:
   - {fileID: 741757831}
   startTile: {fileID: 741757831}
+  finalSprite: {fileID: 21300000, guid: 168756e31d4f5504dab65cc46137011c, type: 3}
   generatedTiles:
   - {fileID: 741757831}
   possibleDecorativeTiles:
   - {fileID: 21300000, guid: 606b282c3a4af9d4289f55464b257256, type: 3}
   - {fileID: 21300000, guid: 94ef89b29266f6e4f80fbe882ff12540, type: 3}
+  - {fileID: 21300000, guid: fb23e9995cca4d845bd01901f74ec3f5, type: 3}
+  - {fileID: 21300000, guid: de175bba6a2348a4a91e5fe51bb09c44, type: 3}
   initialized: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  finalTargetFound: 0
+  finalTarget: {x: 0, y: 0, z: 0}
 --- !u!4 &49704094
 Transform:
   m_ObjectHideFlags: 0
@@ -329,63 +348,14 @@ Transform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114115616232203138, guid: ad53f05a7f280d040a97c4e4012e6424,
     type: 2}
-  m_PrefabInternal: {fileID: 2011813626}
+  m_PrefabInternal: {fileID: 1093848367}
   m_Script: {fileID: 11500000, guid: 2229d64270b15aa4cb7802081166ac73, type: 3}
 --- !u!4 &741757833 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4498143662358348, guid: ad53f05a7f280d040a97c4e4012e6424,
     type: 2}
-  m_PrefabInternal: {fileID: 2011813626}
---- !u!1 &1290313204
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1290313206}
-  - component: {fileID: 1290313205}
-  m_Layer: 0
-  m_Name: CamHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1290313205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1290313204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b89b35e3a0b8004b9d02d6915589794, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minSize: 5
-  maxSize: 20
-  multiplier: 1.1
-  followTransform: {fileID: 2054392115}
-  shakeDuration: 0
-  shakeAmount: 0.1
-  decreaseFactor: 1
-  camTransform: {fileID: 519420032}
---- !u!4 &1290313206
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1290313204}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.22, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 519420032}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2011813626
+  m_PrefabInternal: {fileID: 1093848367}
+--- !u!1001 &1093848367
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -427,36 +397,55 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad53f05a7f280d040a97c4e4012e6424, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &2054392110 stripped
+--- !u!1 &1290313204
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1851289767168392, guid: d788c7df2cd979741b416dc7748f32f0,
-    type: 2}
-  m_PrefabInternal: {fileID: 431187218}
---- !u!61 &2054392111
-BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2054392110}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1290313206}
+  - component: {fileID: 1290313205}
+  m_Layer: 0
+  m_Name: CamHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1290313205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1290313204}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 3}
-    newSize: {x: 6, y: 3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3, y: 6}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b89b35e3a0b8004b9d02d6915589794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSize: 10
+  maxSize: 25
+  multiplier: 1.1
+  followTransform: {fileID: 2054392115}
+  shakeDuration: 0
+  shakeAmount: 0.1
+  decreaseFactor: 1
+  camTransform: {fileID: 519420032}
+--- !u!4 &1290313206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1290313204}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -18.22, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 519420032}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2054392115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4038243287402880, guid: d788c7df2cd979741b416dc7748f32f0,
