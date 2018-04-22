@@ -5,9 +5,6 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField]
-    GameObject target;
-
-    [SerializeField]
     float speed = 5f;
     [SerializeField]
     float range = 10f;
@@ -18,6 +15,9 @@ public class EnemyMovement : MonoBehaviour
     const int RAY_COUNT = 4;
 
     Vector3 targetPosition = Vector3.zero;
+
+    public float steps = 2;
+    float currentNumOfSteps = 0f;
 
     public static Vector2 Substract(Vector2 lhs, Vector3 rhs)
     {
@@ -32,7 +32,24 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            targetPosition = target.transform.position;
+            targetPosition = MapGenerator.instance.targetPosition;
+        }
+
+        if(Vector3.Distance(transform.position, targetPosition) < 25f)
+        {
+            if (!MapGenerator.instance.finalTargetFound)
+            {
+                MapGenerator.instance.SetNewTargetPosition();
+                currentNumOfSteps++;
+                if (currentNumOfSteps >= steps)
+                {
+                    MapGenerator.instance.SetFinalTarget();
+                }
+            }
+            else
+            {
+                Debug.LogError("TUMTURUM, FAJNAL SCRIN");
+            }
         }
 
         RaycastHit2D[] raycastHits2D = new RaycastHit2D[RAY_COUNT];
@@ -48,7 +65,7 @@ public class EnemyMovement : MonoBehaviour
 
             raycastHits2D[i] = Physics2D.Raycast(transform.position, direction, range);
 
-            if(raycastHits2D[i].collider == null)
+            if (raycastHits2D[i].collider == null)
             {
                 dirs[i] = direction;
             }
@@ -59,11 +76,11 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Vector3 directionToMove;
-        if(raycastHits2D[1].collider == null && raycastHits2D[2].collider == null)
+        if (raycastHits2D[1].collider == null && raycastHits2D[2].collider == null)
         {
             directionToMove = targetPosition - transform.position;
         }
-        else if(dirs[0].magnitude > dirs[3].magnitude)
+        else if (dirs[0].magnitude > dirs[3].magnitude)
         {
             directionToMove = dirs[0].normalized;
         }
@@ -72,9 +89,9 @@ public class EnemyMovement : MonoBehaviour
             directionToMove = dirs[3].normalized;
         }
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.forward, directionToMove.normalized), Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.forward, directionToMove.normalized), Time.deltaTime * speed);
 
-        Debug.DrawLine(transform.position ,transform.position + directionToMove * range * 2, Color.yellow);
+        Debug.DrawLine(transform.position, transform.position + directionToMove * range * 2, Color.yellow);
 
         transform.position += transform.up * speed * Time.deltaTime;
     }

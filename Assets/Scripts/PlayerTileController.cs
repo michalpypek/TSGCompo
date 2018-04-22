@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerTileController : MonoBehaviour
 {
-	void FixedUpdate()
+	void Update()
 	{
 		MapGenerator.instance.GenerateTilesToPlayerPos(transform.position);
 	}
