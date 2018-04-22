@@ -56,4 +56,11 @@ public class Car2DController : MonoBehaviour
 		rb.AddForce(rb.GetRelativeVector(relativeForce));
 	}
 
+	void OnCollisionEnter2D (Collision2D col)
+	{
+		Debug.Log("COLLISION");
+		var cam = Camera.main.transform.parent.gameObject.GetComponent<CameraFollowScript>();
+		cam.shakeDuration += 0.25f;
+	}
+
 }
