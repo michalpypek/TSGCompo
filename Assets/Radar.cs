@@ -11,8 +11,6 @@ public class Radar : MonoBehaviour
 
     public Sprite pointerSprite;
 
-    public float range = 5;
-
     public float distance = 50f;
 
     Slider slider;

@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 180
   range: 10
-  rayCount: 10000
+  rayCount: 1000
 --- !u!114 &114381785309575986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,8 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d060bb6cd83365f4988d192c2d6203c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  range: 1
+  speed: 2.5
+  range: 2
   angle: 30
   steps: 2
 --- !u!212 &212614989419569178
