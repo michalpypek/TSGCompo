@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] points;
+    GameObject target;
 
     [SerializeField]
     float speed = 5f;
@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     // Change this and I'll kill you <3
     const int RAY_COUNT = 4;
 
-    bool a = true;
+    Vector3 targetPosition = Vector3.zero;
 
     public static Vector2 Substract(Vector2 lhs, Vector3 rhs)
     {
@@ -26,6 +26,15 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButton(0))
+        {
+            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else
+        {
+            targetPosition = target.transform.position;
+        }
+
         RaycastHit2D[] raycastHits2D = new RaycastHit2D[RAY_COUNT];
         Vector3[] dirs = new Vector3[RAY_COUNT];
 
@@ -50,9 +59,9 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Vector3 directionToMove;
-        if(raycastHits2D[1].collider == null && raycastHits2D[1].collider == null && raycastHits2D[2].collider == null && raycastHits2D[3].collider == null)
+        if(raycastHits2D[1].collider == null && raycastHits2D[2].collider == null)
         {
-            directionToMove = points[0].transform.position - transform.position;
+            directionToMove = targetPosition - transform.position;
         }
         else if(dirs[0].magnitude > dirs[3].magnitude)
         {
@@ -73,7 +82,7 @@ public class EnemyMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + (points[0].transform.position - transform.position).normalized * range);
+        Gizmos.DrawLine(transform.position, transform.position + (targetPosition - transform.position).normalized * range);
 
         Gizmos.color = Color.green;
         for (int i = 0; i < RAY_COUNT; i++)
