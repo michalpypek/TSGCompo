@@ -11,8 +11,6 @@ public class Radar : MonoBehaviour
 
     public Sprite pointerSprite;
 
-    public float range = 5;
-
     public float distance = 50f;
 
     Slider slider;
@@ -26,10 +24,11 @@ public class Radar : MonoBehaviour
         pointerHandle = new GameObject("PointerHandle");
         pointer = new GameObject("Pointer");
         pointer.transform.SetParent(pointerHandle.transform);
-        pointer.transform.localEulerAngles = new Vector3(0f, -90f, 0);
+        //pointer.transform.localEulerAngles = new Vector3(180f, -90f, -90f);
         pointer.AddComponent<SpriteRenderer>().sprite = pointerSprite;
-        pointerHandle.transform.LookAt(enemy.transform.position);
+        //pointerHandle.transform.LookAt(enemy.transform.position);
         slider.value = sliderValue;
+        Quaternion.
     }
 
 
@@ -41,6 +40,10 @@ public class Radar : MonoBehaviour
         if (Vector3.Distance(transform.position, enemy.transform.position) < distance)
         {
             sliderValue += Time.deltaTime / 8;
+        }
+        else if (Vector3.Distance(transform.position, enemy.transform.position) < distance * 1.5f)
+        {
+            // NIE ZMIENIAJ PASKA
         }
         else
         {
@@ -57,5 +60,7 @@ public class Radar : MonoBehaviour
         {
             Debug.LogError("KURWA, ZNALAZŁA MNIE");
         }
+
+        sliderValue = Mathf.Clamp(sliderValue, -0.1f, 1.1f);
     }
 }
