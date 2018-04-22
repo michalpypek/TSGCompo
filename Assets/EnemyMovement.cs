@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                Debug.LogError("TUMTURUM, FAJNAL SCRIN");
+                SceneManager.LoadScene("WIN");
             }
         }
 
@@ -89,7 +90,7 @@ public class EnemyMovement : MonoBehaviour
             directionToMove = dirs[3].normalized;
         }
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.forward, directionToMove.normalized), Time.deltaTime * speed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.forward, directionToMove.normalized), Time.deltaTime * speed * 2);
 
         Debug.DrawLine(transform.position, transform.position + directionToMove * range * 2, Color.yellow);
 

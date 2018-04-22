@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Radar : MonoBehaviour
 {
     EnemyMovement enemy;
     GameObject pointer;
-    GameObject pointerHandle;
 
     public Sprite pointerSprite;
 
@@ -18,17 +18,13 @@ public class Radar : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         enemy = FindObjectOfType<EnemyMovement>();
         slider = FindObjectOfType<Slider>();
-
-        pointerHandle = new GameObject("PointerHandle");
+        
         pointer = new GameObject("Pointer");
-        pointer.transform.SetParent(pointerHandle.transform);
-        //pointer.transform.localEulerAngles = new Vector3(180f, -90f, -90f);
         pointer.AddComponent<SpriteRenderer>().sprite = pointerSprite;
-        //pointerHandle.transform.LookAt(enemy.transform.position);
         slider.value = sliderValue;
-        Quaternion.
     }
 
 
@@ -54,13 +50,12 @@ public class Radar : MonoBehaviour
 
         if (sliderValue < 0)
         {
-            Debug.LogError("KURWA, ZGUBIŁEM JĄ");
+            SceneManager.LoadScene("LOSE");
         }
         else if (sliderValue > 1)
         {
-            Debug.LogError("KURWA, ZNALAZŁA MNIE");
+            SceneManager.LoadScene("LOSE");
         }
-
-        sliderValue = Mathf.Clamp(sliderValue, -0.1f, 1.1f);
+        pointer.transform.LookAt(enemy.transform.position);
     }
 }

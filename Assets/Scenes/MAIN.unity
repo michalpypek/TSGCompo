@@ -520,8 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b89b35e3a0b8004b9d02d6915589794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSize: 10
-  maxSize: 25
+  minSize: 20
+  maxSize: 35
   multiplier: 1.1
   followTransform: {fileID: 2054392115}
   shakeDuration: 0
