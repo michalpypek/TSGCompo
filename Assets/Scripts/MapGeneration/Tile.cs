@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-	public List<Transform> obstacleTransforms = new List<Transform>();
+	public Transform obstacleTransformHolder;
+	public List<GameObject> obstacleTransforms = new List<GameObject>();
 	public List<DecorativeTile> decorativeTiles = new List<DecorativeTile>();
+	bool generated = false;
 
 	void Start()
 	{
@@ -15,12 +17,24 @@ public class Tile : MonoBehaviour
 
 	public void GenerateObstacles()
 	{
+		if (generated)
+			return;
+		obstacleTransforms = new List<GameObject>();
+		generated = true;
+
+		var obstacleTransformsobj = obstacleTransformHolder.GetComponentsInChildren<Transform>().ToList();
+
+		foreach (var item in obstacleTransformsobj)
+		{
+			obstacleTransforms.Add(item.gameObject);
+		}
+
 		foreach (var trasnf in obstacleTransforms)
 		{
-			if(Random.Range(0,100) < 75)
+			if(Random.Range(0,100) < 35)
 			{
 				GameObject obstacle = MapGenerator.instance.possibleObstacles[Random.Range(0, MapGenerator.instance.possibleObstacles.Count)];
-				GameObject instance = Instantiate(obstacle, trasnf) as GameObject;
+				GameObject instance = Instantiate(obstacle, trasnf.transform) as GameObject;
 				instance.transform.localPosition = Vector2.zero;
 			}
 		}
